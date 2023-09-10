@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="935.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monitoring.HelloController">
+
+  <tabs>
+    <Tab text="Список процессов">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="10.0" layoutY="9.0" prefHeight="351.0" prefWidth="922.0">
+                    <columns>
+                      <TableColumn prefWidth="195.0" text="ID" />
+                      <TableColumn minWidth="0.0" prefWidth="542.0" text="Имя Процесса" />
+                        <TableColumn prefWidth="184.0" text="Использование памяти" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Используемая память">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="Button" layoutX="883.0" layoutY="338.0" mnemonicParsing="false" onAction="#onButtonClick" text="Button" />
+                  <Canvas height="200.0" layoutX="115.0" layoutY="66.0" width="318.0" />
+                  <Canvas height="200.0" layoutX="487.0" layoutY="66.0" width="318.0" />
+                  <TextField layoutX="236.0" layoutY="31.0" />
+                  <TextField layoutX="646.0" layoutY="31.0" />
+                  <Label layoutX="13.0" layoutY="35.0" text="Использование оперативной памяти" />
+                  <Label layoutX="468.0" layoutY="35.0" text="Использование процессора" />
+               </children></AnchorPane>
+      </content>
+    </Tab>
+      <Tab text="Список портов">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="10.0" layoutY="9.0" prefHeight="351.0" prefWidth="922.0">
+                     <columns>
+                        <TableColumn prefWidth="360.0" text="ID" />
+                        <TableColumn minWidth="0.0" prefWidth="561.0" text="Состояние" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="Угрозы">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="10.0" layoutY="9.0" prefHeight="351.0" prefWidth="922.0">
+                     <columns>
+                        <TableColumn prefWidth="360.0" text="ID" />
+                        <TableColumn minWidth="0.0" prefWidth="561.0" text="Имя файла" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
