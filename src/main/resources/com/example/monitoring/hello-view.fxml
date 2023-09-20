@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -17,27 +19,40 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="10.0" layoutY="9.0" prefHeight="351.0" prefWidth="922.0">
+                  <TableView fx:id="processInfoTableView" layoutX="10.0" layoutY="9.0" prefHeight="351.0" prefWidth="922.0">
                     <columns>
-                      <TableColumn prefWidth="195.0" text="ID" />
-                      <TableColumn minWidth="0.0" prefWidth="542.0" text="Имя Процесса" />
-                        <TableColumn prefWidth="184.0" text="Использование памяти" />
+                      <TableColumn fx:id="processID" prefWidth="195.0" text="ID" />
+                      <TableColumn fx:id="processName" minWidth="0.0" prefWidth="542.0" text="Имя Процесса" />
+                        <TableColumn fx:id="processCPU" prefWidth="184.0" text="Использование памяти" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="Используемая память">
+    <Tab fx:id="memTab" onSelectionChanged="#setMemTab" text="Используемая память">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="Button" layoutX="883.0" layoutY="338.0" mnemonicParsing="false" onAction="#onButtonClick" text="Button" />
-                  <Canvas height="200.0" layoutX="115.0" layoutY="66.0" width="318.0" />
-                  <Canvas height="200.0" layoutX="487.0" layoutY="66.0" width="318.0" />
-                  <TextField layoutX="236.0" layoutY="31.0" />
-                  <TextField layoutX="646.0" layoutY="31.0" />
+                  <TextField fx:id="memTextField" layoutX="236.0" layoutY="31.0" />
+                  <TextField fx:id="virtTextField" layoutX="646.0" layoutY="31.0" />
                   <Label layoutX="13.0" layoutY="35.0" text="Использование оперативной памяти" />
                   <Label layoutX="468.0" layoutY="35.0" text="Использование процессора" />
+                  <LineChart fx:id="ramChart" layoutX="13.0" layoutY="66.0" prefHeight="285.0" prefWidth="425.0">
+                    <xAxis>
+                      <NumberAxis fx:id="ramX" side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="ramY" side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+                  <LineChart fx:id="virtualMemChart" layoutX="484.0" layoutY="56.0" prefHeight="297.0" prefWidth="425.0">
+                     <xAxis>
+                        <NumberAxis fx:id="virtualX" side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis fx:id="virtualY" side="LEFT" />
+                     </yAxis>
+                  </LineChart>
                </children></AnchorPane>
       </content>
     </Tab>
@@ -45,12 +60,9 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="10.0" layoutY="9.0" prefHeight="351.0" prefWidth="922.0">
-                     <columns>
-                        <TableColumn prefWidth="360.0" text="ID" />
-                        <TableColumn minWidth="0.0" prefWidth="561.0" text="Состояние" />
-                     </columns>
-                  </TableView>
+                  <Button fx:id="scanButton" layoutX="773.0" layoutY="14.0" mnemonicParsing="false" onAction="#scanbtnClick" text="Сканирование портов" />
+                  <ListView fx:id="ports" layoutX="14.0" layoutY="37.0" prefHeight="329.0" prefWidth="740.0" />
+                  <Label layoutX="46.0" layoutY="18.0" text="Открытые порты" />
                </children>
             </AnchorPane>
          </content>
