@@ -35,9 +35,9 @@ public class HelloController implements Initializable {
     @FXML
     TableColumn<ProcessInfo, Double> processCPU;
     @FXML
-    LineChart<Integer,Double> virtualMemChart;
+    LineChart<Integer, Double> virtualMemChart;
     @FXML
-    LineChart<Integer,Double> ramChart;
+    LineChart<Integer, Double> ramChart;
     @FXML
     NumberAxis virtualX;
     @FXML
@@ -50,7 +50,8 @@ public class HelloController implements Initializable {
     ListView<String> ports;
     @FXML
     Tab memTab;
-
+    MemoryInfo memoryInfo= new MemoryInfo();
+    Thread memorythread = new Thread(memoryInfo);
 
     public void getProcessList() {
         ProcessList processList = new ProcessList();
@@ -60,8 +61,8 @@ public class HelloController implements Initializable {
 
     @FXML
     public void scanbtnClick() throws IOException {
-        PortScan portScan= new PortScan();
-        ports.setItems(portScan.runPortScan("127.0.0.1",65535));
+        PortScan portScan = new PortScan();
+        ports.setItems(portScan.runPortScan("127.0.0.1", 65535));
     }
 
     @Override
@@ -69,9 +70,10 @@ public class HelloController implements Initializable {
         initProcessPage();
     }
 
-    public  void setMemTab(){
+    public void setMemTab() {
         initMemoryPage();
     }
+
     public void initProcessPage() {
         processID.setCellValueFactory(new PropertyValueFactory<>("processID"));
         processName.setCellValueFactory(new PropertyValueFactory<>("processName"));
@@ -87,18 +89,15 @@ public class HelloController implements Initializable {
         ObservableList<Double> virtlist = FXCollections.observableArrayList();
         XYChart.Series ramseries = new XYChart.Series();
         XYChart.Series virtseries = new XYChart.Series();
-        MemoryInfo memoryInfo = new MemoryInfo();
-        memoryInfo.updateMemoryInfo();
+        memorythread.run();
         ramX = new NumberAxis(0, 20, 1);
         ramY = new NumberAxis(0, memoryInfo.getTotalMemory(), 0.1);
         virtualX = new NumberAxis(0, 20, 1);
         virtualY = new NumberAxis(0, memoryInfo.getMaxVirtual(), 0.1);
-        Thread memThread = new Thread(memoryInfo);
-        memThread.run();
         ramChart.getData().removeAll();
         virtualMemChart.getData().removeAll();
         ramlist = memoryInfo.getRamlist();
-        virtlist = memoryInfo.getVirtual();
+        virtlist = memoryInfo.getVirtualmemlist();
         ramdata.removeAll();
         virtlist.removeAll();
         for (int i = 0; i < ramlist.size(); i++) {
