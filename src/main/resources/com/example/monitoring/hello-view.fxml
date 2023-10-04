@@ -12,14 +12,14 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="935.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monitoring.HelloController" >
+<TabPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1123.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monitoring.HelloController">
 
   <tabs>
-    <Tab text="Список процессов">
+    <Tab fx:id="procTab" text="Список процессов">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="processInfoTableView" layoutX="10.0" layoutY="9.0" prefHeight="351.0" prefWidth="922.0">
+                  <TableView fx:id="processInfoTableView" layoutX="8.0" layoutY="14.0" prefHeight="215.0" prefWidth="922.0">
                     <columns>
                       <TableColumn fx:id="processID" prefWidth="195.0" text="ID" />
                       <TableColumn fx:id="processName" minWidth="0.0" prefWidth="542.0" text="Имя Процесса" />
@@ -29,7 +29,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab fx:id="memTab" onSelectionChanged="#setMemTab" text="Используемая память">
+    <Tab fx:id="memTab" text="Используемая память">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>

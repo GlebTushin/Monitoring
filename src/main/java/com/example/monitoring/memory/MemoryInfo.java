@@ -6,7 +6,7 @@ import oshi.SystemInfo;
 import oshi.hardware.*;
 import oshi.util.FormatUtil;
 
-public class MemoryInfo implements Runnable {
+public class MemoryInfo  {
     ObservableList<Double> virtualmemlist = FXCollections.observableArrayList();
     ObservableList<Double> ramlist = FXCollections.observableArrayList();
     private double memoryInUse;
@@ -55,25 +55,21 @@ public class MemoryInfo implements Runnable {
         GlobalMemory globalMemory = hardware.getMemory();
         VirtualMemory virtualMemory = globalMemory.getVirtualMemory();
         long usedMemory = globalMemory.getTotal() - globalMemory.getAvailable();
-        totalMemory = globalMemory.getTotal();
-        memoryInUse = usedMemory;
-        usedVirtual = virtualMemory.getVirtualInUse();
-        maxVirtual = virtualMemory.getVirtualMax();
-        if (ramlist.size() == 20) {
+        totalMemory = (double) globalMemory.getTotal() /(1024*1024*1024);
+        memoryInUse = (double) usedMemory /(1024*1024*1024);
+        usedVirtual = (double) virtualMemory.getVirtualInUse() /(1024*1024*1024);
+        maxVirtual = (double) virtualMemory.getVirtualMax() /(1024*1024*1024);
+        if (ramlist.size() == 10) {
             ramlist.remove(0);
         }
         ramlist.add(getMemoryInUse());
-        if (virtualmemlist.size() == 20) {
+        if (virtualmemlist.size() == 10) {
             virtualmemlist.remove(0);}
         virtualmemlist.add(getUsedVirtual());
 
     }
-    @Override
-    public void run() {
-        updateMemoryInfo();
 
 
-    }
 
 
     public void setVirtualmemlist(ObservableList<Double> virtualmemlist) {

@@ -5,8 +5,9 @@ import javafx.collections.ObservableList;
 import oshi.SystemInfo;
 import oshi.software.os.*;
 import java.util.ArrayList;
+import java.util.List;
 
-public class ProcessList {
+public class ProcessList  {
 
 
     public ObservableList<ProcessInfo> getProcList() {
@@ -20,5 +21,6 @@ public class ProcessList {
         }
         return procs;
     }
+
 
 }
