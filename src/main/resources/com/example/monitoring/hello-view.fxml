@@ -9,10 +9,11 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1123.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monitoring.HelloController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1123.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.monitoring.HelloController">
 
   <tabs>
     <Tab fx:id="procTab" text="Список процессов">
@@ -23,7 +24,7 @@
                     <columns>
                       <TableColumn fx:id="processID" prefWidth="195.0" text="ID" />
                       <TableColumn fx:id="processName" minWidth="0.0" prefWidth="542.0" text="Имя Процесса" />
-                        <TableColumn fx:id="processCPU" prefWidth="184.0" text="Использование памяти" />
+                        <TableColumn fx:id="processCPU" prefWidth="184.0" text="Использование процессора" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
@@ -34,10 +35,10 @@
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="memTextField" layoutX="236.0" layoutY="31.0" />
-                  <TextField fx:id="virtTextField" layoutX="646.0" layoutY="31.0" />
+                  <TextField fx:id="virtTextField" layoutX="684.0" layoutY="31.0" />
                   <Label layoutX="13.0" layoutY="35.0" text="Использование оперативной памяти" />
-                  <Label layoutX="468.0" layoutY="35.0" text="Использование процессора" />
-                  <LineChart fx:id="ramChart" layoutX="13.0" layoutY="66.0" prefHeight="285.0" prefWidth="425.0">
+                  <Label layoutX="468.0" layoutY="35.0" text="Использование виртуальной памяти" />
+                  <LineChart fx:id="ramChart" layoutX="30.0" layoutY="78.0" prefHeight="285.0" prefWidth="425.0">
                     <xAxis>
                       <NumberAxis fx:id="ramX" side="BOTTOM" />
                     </xAxis>
@@ -45,7 +46,7 @@
                       <NumberAxis fx:id="ramY" side="LEFT" />
                     </yAxis>
                   </LineChart>
-                  <LineChart fx:id="virtualMemChart" layoutX="484.0" layoutY="56.0" prefHeight="297.0" prefWidth="425.0">
+                  <LineChart fx:id="virtualMemChart" layoutX="491.0" layoutY="72.0" prefHeight="297.0" prefWidth="425.0">
                      <xAxis>
                         <NumberAxis fx:id="virtualX" side="BOTTOM" />
                      </xAxis>
@@ -67,16 +68,11 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab text="Угрозы">
+      <Tab text="Состояние файервола" fx:id="fireTab">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="10.0" layoutY="9.0" prefHeight="351.0" prefWidth="922.0">
-                     <columns>
-                        <TableColumn prefWidth="360.0" text="ID" />
-                        <TableColumn minWidth="0.0" prefWidth="561.0" text="Имя файла" />
-                     </columns>
-                  </TableView>
+                  <TextArea layoutX="14.0" layoutY="14.0" prefHeight="522.0" prefWidth="699.0" fx:id="firewallArea"/>
                </children>
             </AnchorPane>
          </content>

@@ -1,1 +1,29 @@
 
+
+Wed Oct 25 18:55:26 MSK 2023
+Время работы программы: 16 секунд
+Используемая память: 5.769685093313456
+Используемая виртуальная память : 6.245819330215454
+Используемые процессы: 
+NVIDIA Share
+NVDisplay.Container
+jucheck
+WmiPrvSE
+atmgr
+sihost
+csrss
+fsnotifier
+CompPkgSrv
+System
+audiodg
+smss
+dllhost
+java
+gamingservices
+Secure System
+gamingservicesnet
+Idle
+browser
+XboxPcAppFT
+nvcontainer
+ste

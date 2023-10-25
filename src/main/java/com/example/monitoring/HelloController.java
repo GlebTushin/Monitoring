@@ -15,9 +15,9 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
@@ -58,6 +58,10 @@ public class HelloController implements Initializable {
     Tab memTab;
     @FXML
     Tab procTab;
+    @FXML
+    Tab fireTab;
+    @FXML
+    TextArea firewallArea;
     MemoryInfo memoryInfo = new MemoryInfo();
     ObservableList<XYChart.Data> virtdata = FXCollections.observableArrayList();
     ObservableList<XYChart.Data> ramdata = FXCollections.observableArrayList();
@@ -67,6 +71,7 @@ public class HelloController implements Initializable {
     XYChart.Series virtseries = new XYChart.Series();
     TimerTask memoryTask;
     TimerTask processTask;
+    TimerTask firewallTask;
 
 
     public void initProcessTask() {
@@ -100,9 +105,11 @@ public class HelloController implements Initializable {
         initMemoryPage();
         initMemoryTask();
         initProcessTask();
+        checkFirewallStatus();
         Timer timer =new Timer();
         timer.scheduleAtFixedRate(processTask,0,1000);
         timer.scheduleAtFixedRate(memoryTask,0,1000);
+        timer.scheduleAtFixedRate(firewallTask,0,1000);
     }
 
 
@@ -152,6 +159,45 @@ public class HelloController implements Initializable {
                 avgramused=(avgramused+memoryInfo.getMemoryInUse())/2;
                 avgvirtmemused=(avgvirtmemused+memoryInfo.getUsedVirtual())/2;
                 }
+
+        };
+    }
+    public void checkFirewallStatus(){
+        firewallTask = new TimerTask()  {
+            @Override
+            public void run() {
+                StringBuilder output = new StringBuilder();
+                Process p = null;
+                try {
+                    p = Runtime.getRuntime().exec("netsh advfirewall show allprofiles state");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    p.waitFor();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                BufferedReader reader = null;
+                try {
+                    reader = new BufferedReader(new InputStreamReader(p.getInputStream(), "CP866"));
+                } catch (UnsupportedEncodingException e) {
+                    throw new RuntimeException(e);
+                }
+                String line = "";
+                if (fireTab.isSelected()){
+                    firewallArea.clear();
+                    while (true) {
+                        try {
+                            if (!((line = reader.readLine()) != null)) break;
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        firewallArea.appendText(line+"\n");
+                    }
+                }
+
+            }
 
         };
     }
